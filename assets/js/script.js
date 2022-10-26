@@ -1,6 +1,5 @@
 var APIKey = '891e9d3f9aa64c16809947ac6f8de537';
 
-// var userFormEl = document.querySelector('#user-form');
 var dishName = document.querySelector('#food');
 var cuisineName = document.querySelector('#cuisine');
 var submitButtonEl = $('#submit')
