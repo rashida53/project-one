@@ -11,9 +11,9 @@
 </head>
 
 <body>
-<header>
-    <h1 class="font-bold text-xl mx-10">Project in the Making</h1>
-</header>
+    <header>
+        <h1 class="font-bold text-xl mx-10">Project in the Making</h1>
+    </header>
 
     <!-- <div class="flex" v-cloak id="dribbleShot">
         <div class="main px-16 border-r border-gray-200">
@@ -29,24 +29,26 @@
             </form>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit" id="submit"> Search</button>
-          </div>
+          </div> -->
 
-          <!-- this is the div that divides the page into 3 columns -->
-          <div class="grid grid-cols-3  mt-12 rounded-lg"></div>
-          <div class="flex mt-12 items-end"></div>
-          
-          <!-- left column with question mark and burger -->
-          <div class="grid grid-cols-9 gap-6 mt-12">
-            <div @click="activeCategory = cat.id" class=" border rounded-full p-2 flex flex-col items-center shadow-xl cursor-pointer transition-colors duration-700 ease-in-out" :class="{'bg-yellow-400': cat.id == activeCategory}" v-for="(cat, idx) in categories">
-              <div class="border rounded-full p-2 bg-white">
+    <!-- this is the div that divides the page into 3 columns -->
+    <div class="grid grid-cols-3  mt-12 rounded-lg"></div>
+    <div class="flex mt-12 items-end"></div>
+
+    <!-- left column with question mark and burger -->
+    <div class="grid grid-cols-9 gap-6 mt-12">
+        <div @click="activeCategory = cat.id"
+            class=" border rounded-full p-2 flex flex-col items-center shadow-xl cursor-pointer transition-colors duration-700 ease-in-out"
+            :class="{'bg-yellow-400': cat.id == activeCategory}" v-for="(cat, idx) in categories">
+            <div class="border rounded-full p-2 bg-white">
                 <!-- burger -->
                 <p style="font-size:50px">&#127828;</p>
-              </div>
-              <!-- question mark -->
-              <p style="font-size:100px">&#10068;</p>
             </div>
+            <!-- question mark -->
+            <p style="font-size:100px">&#10068;</p>
+        </div>
         </form>
-    </div>  -->
+    </div> -->
     <!-- <div class="container flex justify-center" style="width: 200px; height: 200px;" id="showIngredients">DIV</div>
     <div class="container flex justify-center" style="width: 200px; height: 200px;" id="showIngredients">
         <ul id="ingredientsAndPrices">UL</ul>
@@ -133,12 +135,12 @@
                 <h1 class="font-bold text-lg mx-10">Project in the Making</h1>
                 <div class="flex items-center ml-auto bg-gray-100 self-stretch custom-rounded px-4 w-2/3">
                     <i class="fa fa-search">Dish</i>
-                    <input type="text" class="px-4 self-stretch bg-transparent flex-grow outline-none"
+                    <input type="text" class="px-4 self-stretch bg-transparent flex-grow outline-none" id="food"
                         placeholder="Dish Name">
                 </div>
                 <div class="flex items-center ml-auto bg-gray-100 self-stretch custom-rounded px-4 w-2/3">
                     <i class="fa fa-search">Cuisine</i>
-                    <input type="text" class="px-4 self-stretch bg-transparent flex-grow outline-none"
+                    <input type="text" class="px-4 self-stretch bg-transparent flex-grow outline-none" id="cuisine"
                         placeholder="e.g. Italian">
                 </div>
                 <button
@@ -199,55 +201,59 @@
     <div class="bg-gray-100 sidebar flex flex-col">
         <div class="px-6">
             <div class="h-12 mt-8 flex justify-end items-center">
-              <i class="fa fa-user"></i>
-              
-              <div class="rounded-lg px-3 font-bold text-xs py-1 ml-6"></div>
+                <i class="fa fa-user"></i>
+
+                <div class="rounded-lg px-3 font-bold text-xs py-1 ml-6"></div>
             </div>
             <div class="mt-12">
-              <p class="font-medium text-xl text-center">Don't feel like cooking?</p>
+                <p class="font-medium text-xl text-center">Don't feel like cooking?</p>
             </div>
             <div class="mt-12 p-6 bg-orange-800 custom-rounded font-hairline text-xs">
 
-              <div class="mt-12 p-6 bg-orange-800 custom-rounded font-hairline text-xs">
-                <div class="flex justify-between items-center">
-                  <p class="text-white">Search Nearby Restaurants:</p>
-                  <p class="text-yellow-400 cursor-pointer"></p>
-                </div>
+                <div class="mt-12 p-6 bg-orange-800 custom-rounded font-hairline text-xs">
+                    <div class="flex justify-between items-center">
+                        <p class="text-white">Search Nearby Restaurants:</p>
+                        <p class="text-yellow-400 cursor-pointer"></p>
+                    </div>
 
-              <div class="flex items-center mt-4">
-                <div class="rounded-lg px-2 py-1 timer"><i class="fa fa-clock text-yellow-400"></i></div>
-                <p class="text-white mx-3">Radius</p>
-                <p class="text-yellow-400 cursor-pointer ml-auto">10 miles</p>
-              </div>
-            </div>
-            <div v-for="(item, index) in cartItems" class="grid grid-cols-4 gap-1 mb-5" :class="{'mt-12' : index == 0}">
-              <div class="h-10 rounded-lg" :style="{ backgroundSize: 'cover', backgroundRepeat: 'no-repeat' , backgroundImage: 'url(\'' + item.image + '\')' }"></div>
-              <div class="col-span-2 grid grid-cols-3 text-xxs font-semibold ">
-              </div>
-            </div>
+                    <div class="flex items-center mt-4">
+                        <div class="rounded-lg px-2 py-1 timer"><i class="fa fa-clock text-yellow-400"></i></div>
+                        <p class="text-white mx-3">Radius</p>
+                        <p class="text-yellow-400 cursor-pointer ml-auto">10 miles</p>
+                    </div>
+                </div>
+                <div v-for="(item, index) in cartItems" class="grid grid-cols-4 gap-1 mb-5"
+                    :class="{'mt-12' : index == 0}">
+                    <div class="h-10 rounded-lg"
+                        :style="{ backgroundSize: 'cover', backgroundRepeat: 'no-repeat' , backgroundImage: 'url(\'' + item.image + '\')' }">
+                    </div>
+                    <div class="col-span-2 grid grid-cols-3 text-xxs font-semibold ">
+                    </div>
+                </div>
                 <div class="grid grid-cols-4 gap-1 mb-5">
-   
-                <div class="flex justify-end items-center text-gray-600 font-hairline text-xs">
-              </div>
+
+                    <div class="flex justify-end items-center text-gray-600 font-hairline text-xs">
+                    </div>
+                </div>
             </div>
-          </div>
-     
-            </div>
+
         </div>
-      </div>
-      <div class="flex h-10">
+    </div>
+    </div>
+    <div class="flex h-10">
         <div class="flex-grow px-16 main border-r border-gray-200"></div>
-        
+
         <!-- don't need this -->
         <!-- <div class="sidebar bg-gray-100"></div> -->
-      </div>
+    </div>
     </div>
     </div>
     <div class="flex h-10">
         <div class="flex-grow px-16 main border-r border-gray-200"></div>
         <div class="sidebar bg-gray-100"></div>
     </div>
-      <footer>A Crimson Champions Project <p style="font-size:100px">&#127790;</p></footer>
+    <footer>A Crimson Champions Project <p style="font-size:100px">&#127790;</p>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -255,4 +261,3 @@
 </body>
 
 </html>
-
