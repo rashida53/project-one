@@ -1,6 +1,6 @@
 var APIKey = '891e9d3f9aa64c16809947ac6f8de537';
 
-var userFormEl = document.querySelector('#user-form');
+var submitButtonEl = $('#submit')
 var dishName = document.querySelector('#food');
 var cuisineName = document.querySelector('#cuisine');
 
@@ -21,7 +21,7 @@ var formSubmitHandler = function (event) {
     }
 };
 
-userFormEl.addEventListener('submit', formSubmitHandler);
+submitButtonEl.on('click', formSubmitHandler);
 
 function getDishInfo(dish, cuisine) {
     var apiUrl = 'https://api.spoonacular.com/recipes/complexSearch?query=' + dish + '&cuisine=' + cuisine + '&apiKey=' + APIKey
