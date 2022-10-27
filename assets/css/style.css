@@ -6,27 +6,28 @@ body * {
   display: none;
 }
 
-header{
+header {
   text-align: center;
-  background-color: #D65A31;
-  color:white;
+  background-color: #F05454;
+  color: white;
   padding: 50px;
-  
+
 }
 
-#dribbleShot{
-  background-color: #B2B2B2;
+#dribbleShot {
+  background-color: #FFF7E9;
 }
 
-footer{
+footer {
   background-color: #222831;
-  color:white;
+  color: white;
   text-align: center;
 }
 
-form{
-  width:60vw;
+form {
+  width: 60vw;
 }
+
 .main {
   flex: 3;
 }
@@ -34,12 +35,13 @@ form{
 .sidebar {
   flex: 1;
 }
+
 .custom-rounded {
   border-radius: 25px;
 }
 
 .custom-tr-rounded {
-  border-radius:  0 25px 0 0;
+  border-radius: 0 25px 0 0;
 }
 
 .timer {
@@ -48,4 +50,15 @@ form{
 
 .text-xxs {
   font-size: .7rem;
+}
+
+#right-section {
+  background-color: #30475E;
+}
+
+.headingText {
+  color: black;
+  font-size: 35px;
+  text-align: center;
+  padding-bottom: 3%;
 }

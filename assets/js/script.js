@@ -1,4 +1,4 @@
-var APIKey = '891e9d3f9aa64c16809947ac6f8de537';
+var APIKey = 'be1a3b16ffa44575b01cb470f3ce3e58';
 
 var submitButtonEl = $('#submit')
 var dishName = document.querySelector('#food');
@@ -8,6 +8,9 @@ var submitButtonEl = $('#submit')
 var dishesContainer = $('#showIngredients');
 
 var ingredientsContainer = $('#ingredientsAndPrices');
+var selectedDish = $('#selectedDishName');
+
+selectedDish.hide();
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -41,12 +44,15 @@ function getDishInfo(dish, cuisine) {
 }
 
 var displayDishName = function (dish) {
+    ingredientsContainer.empty();
+    selectedDish.hide();
 
     var buttonContent = dish.title;
 
     var button = $('<button>');
     button.text(buttonContent);
     button.attr('id', dish.id);
+    button.addClass("text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 object-scale-down");
     button.on('click', clickDish);
     dishesContainer.append(button);
 
@@ -55,8 +61,11 @@ var displayDishName = function (dish) {
 function clickDish(event) {
     event.preventDefault();
 
+
     var buttonClicked = event.target;
     displayIngredients(buttonClicked.id);
+    dishesContainer.empty();
+    selectedDish.show();
 }
 
 var displayIngredients = function (id) {
@@ -70,15 +79,14 @@ var displayIngredients = function (id) {
                     for (var i = 0; i < data.extendedIngredients.length; i++) {
 
                         var listItemContent = data.extendedIngredients[i].name;
-                        var priceContent = data.extendedIngredients[i].amount + 'USD';
+                        var priceContent = data.extendedIngredients[i].amount + ' USD';
 
                         var listItem = $('<li>');
-                        listItem.text(listItemContent);
-                        var priceItem = $('<li>');
-                        priceItem.text(priceContent);
+                        listItem.text(listItemContent + ' - ' + priceContent);
+                        listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow");
+
 
                         ingredientsContainer.append(listItem);
-                        ingredientsContainer.append(priceItem);
                     }
 
                 });
