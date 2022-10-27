@@ -1,6 +1,7 @@
 var APIKey = 'be1a3b16ffa44575b01cb470f3ce3e58';
+var yelpApiKey = 'q09sGJc_DDiCQJfadsvDcFou2DZcDrnwD2oep_lHsFuenWM2qxPYUJArBPtxHTujiCSaL12tDFp-kV_huf1FjzQpuyoKHEuPBLzBcDQqqE2QB9QpNhm9XYJa6tFaY3Yx';
 
-var submitButtonEl = $('#submit')
+
 var dishName = document.querySelector('#food');
 var cuisineName = document.querySelector('#cuisine');
 var submitButtonEl = $('#submit')
@@ -9,6 +10,9 @@ var dishesContainer = $('#showIngredients');
 
 var ingredientsContainer = $('#ingredientsAndPrices');
 var selectedDish = $('#selectedDishName');
+
+var ingredientButton = $('#ingredientButton');
+var ingredientName = document.querySelector('#ingredient');
 
 selectedDish.hide();
 
@@ -26,6 +30,20 @@ var formSubmitHandler = function (event) {
 };
 
 submitButtonEl.on('click', formSubmitHandler);
+
+var clickHandler = function (event) {
+    event.preventDefault();
+
+    var ingredientNameEl = ingredientName.value.trim();
+
+    if (ingredientNameEl) {
+        getIngredientInfo(ingredientNameEl)
+    } else {
+        alert("Please enter an ingredient");
+    }
+};
+
+ingredientButton.on('click', clickHandler);
 
 function getDishInfo(dish, cuisine) {
     var apiUrl = 'https://api.spoonacular.com/recipes/complexSearch?query=' + dish + '&cuisine=' + cuisine + '&apiKey=' + APIKey
@@ -68,7 +86,10 @@ function clickDish(event) {
     selectedDish.show();
 }
 
+
+
 var displayIngredients = function (id) {
+
     ingredientsContainer.empty();
     var apiUrl = 'https://api.spoonacular.com/recipes/' + id + '/information?apiKey=' + APIKey
 
@@ -80,6 +101,7 @@ var displayIngredients = function (id) {
 
                         var listItemContent = data.extendedIngredients[i].name;
                         var priceContent = data.extendedIngredients[i].amount + ' USD';
+                        priceContent.attr('id', priceContent[i]);
 
                         var listItem = $('<li>');
                         listItem.text(listItemContent + ' - ' + priceContent);
@@ -95,6 +117,21 @@ var displayIngredients = function (id) {
 };
 
 
+var getIngredientInfo = function (ingredient) {
+
+
+    var apiUrl = 'https://api.edamam.com/api/food-database/v2/parser?app_id=0c089911&app_key=dfc46540c3734d0319db196d84047446&ingr=' + ingredient + '&nutrition-type=cooking';
+    fetch(apiUrl)
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log(data.parsed[0].food.nutrients);
+
+                }
+                );
+            }
+        })
+}
 
 
 
