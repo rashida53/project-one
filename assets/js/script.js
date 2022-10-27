@@ -1,5 +1,4 @@
 var APIKey = 'be1a3b16ffa44575b01cb470f3ce3e58';
-var yelpApiKey = 'q09sGJc_DDiCQJfadsvDcFou2DZcDrnwD2oep_lHsFuenWM2qxPYUJArBPtxHTujiCSaL12tDFp-kV_huf1FjzQpuyoKHEuPBLzBcDQqqE2QB9QpNhm9XYJa6tFaY3Yx';
 
 
 var dishName = document.querySelector('#food');
@@ -86,7 +85,7 @@ function clickDish(event) {
     selectedDish.show();
 }
 
-
+var sum = 0;
 
 var displayIngredients = function (id) {
 
@@ -99,18 +98,25 @@ var displayIngredients = function (id) {
                 response.json().then(function (data) {
                     for (var i = 0; i < data.extendedIngredients.length; i++) {
 
+                        var row = $('<div>');
+                        row.addClass("flex justify-center");
+
                         var listItemContent = data.extendedIngredients[i].name;
-                        var priceContent = data.extendedIngredients[i].amount + ' USD';
-                        priceContent.attr('id', priceContent[i]);
+                        var priceContent = data.extendedIngredients[i].amount;
 
                         var listItem = $('<li>');
-                        listItem.text(listItemContent + ' - ' + priceContent);
-                        listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow");
+                        listItem.text(listItemContent + ' - ' + priceContent + 'USD');
+                        listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
+                        listItem.attr('id', priceContent);
+                        sum += priceContent;
 
-
-                        ingredientsContainer.append(listItem);
+                        var haveButton = $('<button>');
+                        haveButton.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow");
+                        haveButton.text("I have this");
+                        row.append(listItem, haveButton);
+                        ingredientsContainer.append(row);
                     }
-
+                    console.log(sum);
                 });
             }
         })
@@ -126,9 +132,7 @@ var getIngredientInfo = function (ingredient) {
             if (response.ok) {
                 response.json().then(function (data) {
                     console.log(data.parsed[0].food.nutrients);
-
-                }
-                );
+                });
             }
         })
 }
