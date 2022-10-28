@@ -21,11 +21,6 @@ header {
   background:url(../images/adobe071.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  /* added a background image - this can be changed as we want */
-  background:url(../images/adobe071.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height:70vh
 }
 
 footer {
