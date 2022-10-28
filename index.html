@@ -21,7 +21,6 @@
                 <i class="fa fa-bars cursor-pointer"></i>
 
                 <!-- this is the search form -->
-
                 <h2 class="font-medium text-xl text-center">I feel like eating:</h2>
 
                 <div
@@ -39,24 +38,20 @@
                     class="flex items-center ml-auto bg-gray-100 custom-rounded px-4 h-10 w-1/8 border-2 border-[#F05454]"
                     type="submit" id="submit"> Search
                 </button>
-
-
-
             </div>
 
             <!-- this is the left section - reserved for later content -->
             <div class="grid grid-cols-3  mt-12 rounded-lg">
-                <div class="col-span-1 border rounded-full p-2 flex flex-col items-center shadow-xl cursor-pointer transition-colors duration-700 ease-in-out"
-                    :class="{'bg-yellow-400': cat.id == activeCategory}" v-for="(cat, idx) in categories">
-                    <div class="border rounded-full p-2 bg-white">
-                        <!-- burger -->
-                        <p style="font-size:70px">&#127828;</p>
-
-                        <!-- question mark -->
-                        <p style="font-size:100px">&#10068;</p>
+                <div class="col-span-1 border p-2 flex flex-col items-center shadow-xl cursor-pointer transition-colors duration-700 ease-in-out"
+                    :class="{: cat.id == activeCategory}" v-for="(cat, idx) in categories">
+                    <!-- white box -->
+                    <div class="p-8 bg-orange-200" id="ingredientCost">
+                        Cost of Ingredients:
+                        <div class="total">
+                            placeholder cost
+                        </div>
                     </div>
                 </div>
-
 
                 <!-- this is the center section where the recipes and ingredients appear after a successful search -->
                 <div class="col-span-2 ">
@@ -66,13 +61,8 @@
                         <h2 class="headingText" id="selectedDishName">Here's what you need</h2>
                         <ul id="ingredientsAndPrices"></ul>
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
         <div class="shadow-lg relative h-40 custom-rounded"
             :style="{ backgroundSize: 'cover', backgroundRepeat: 'no-repeat' , backgroundImage: 'url(\'' + food.image + '\')' }">
@@ -96,9 +86,8 @@
             </div>
 
             <div class="mt-12 p-6 bg-white custom-rounded font-hairline text-xs">
+
                 <div class="mt-12 p-6 bg-white custom-rounded font-hairline text-xs" id="macroContainer">
-
-
                 </div>
 
                 <div v-for="(item, index) in cartItems" class="grid grid-cols-4 gap-1 mb-5"

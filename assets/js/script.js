@@ -12,6 +12,7 @@ var selectedDish = $('#selectedDishName');
 
 var ingredientButton = $('#ingredientButton');
 var ingredientName = document.querySelector('#ingredient');
+var ingredientCost = document.querySelector('#ingredientCost');
 
 var macroContainer = $('#macroContainer');
 
@@ -107,7 +108,7 @@ var displayIngredients = function (id) {
                         var priceContent = data.extendedIngredients[i].amount;
 
                         var listItem = $('<li>');
-                        listItem.text(listItemContent + ' - ' + priceContent + 'USD');
+                        listItem.text(listItemContent + ' - $' + priceContent + ' USD');
                         listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
                         listItem.attr('id', priceContent);
                         sum += priceContent;
@@ -127,7 +128,6 @@ var displayIngredients = function (id) {
 };
 
 
-
 var displaySum = function () {
     sumContainer.text(sum);
 }
@@ -139,6 +139,8 @@ var updateSum = function () {
 }
 
 var nutrientMap = [{ CHOCDF: 'Carbohydrate' }, { ENERC_KCAL: 'Calories' }, { FAT: 'Fat' }, { FIBTG: 'Fiber' }, { PROCNT: 'Protein' }];
+
+
 
 var getIngredientInfo = function (ingredient) {
 

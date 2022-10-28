@@ -16,12 +16,14 @@ header {
 
 #dribbleShot {
   background-color: #FFF7E9;
+  min-height:70vh
 }
 
 footer {
   background-color: #222831;
   color: white;
   text-align: center;
+  min-height:10vh
 }
 
 form {
