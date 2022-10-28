@@ -10,12 +10,17 @@ header {
   text-align: center;
   /* changed header color to match footer */
   background-color: #222831;
-  color: #FFF7E9;
+  color: white;
   padding: 50px;
+
 }
 
 #dribbleShot {
   background-color: #FFF7E9;
+  /* added a background image - this can be changed as we want */
+  background:url(../images/adobe071.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   /* added a background image - this can be changed as we want */
   background:url(../images/adobe071.jpg);
   background-repeat: no-repeat;
@@ -51,9 +56,10 @@ form {
 }
 
 /* removed this styling - it was part of the template that we don't use */
+/* /* removed this styling - it was part of the template that we don't use */
 /* .timer {
   background: rgba(217, 194, 105, .2);
-} */
+} */ */
 
 /* .text-xxs {
   font-size: .7rem;
