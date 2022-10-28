@@ -14,7 +14,7 @@ var ingredientButton = $('#ingredientButton');
 var ingredientName = document.querySelector('#ingredient');
 var ingredientCost = document.querySelector('#ingredientCost');
 
-var sumContainer = $('#sumContainer');
+var macroContainer = $('#macroContainer');
 
 selectedDish.hide();
 
@@ -138,6 +138,7 @@ var updateSum = function () {
     displaySum;
 }
 
+var nutrientMap = [{ CHOCDF: 'Carbohydrate' }, { ENERC_KCAL: 'Calories' }, { FAT: 'Fat' }, { FIBTG: 'Fiber' }, { PROCNT: 'Protein' }];
 
 
 
@@ -150,11 +151,38 @@ var getIngredientInfo = function (ingredient) {
             if (response.ok) {
                 response.json().then(function (data) {
                     console.log(data.parsed[0].food.nutrients);
+                    console.log(data.parsed[0]);
+
+                    // var nutrientKeys = Object.keys(data.parsed[0].food.nutrients);
+
+                    var nutrientKeys = Object.keys(data.parsed[0].food.nutrients);
+                    for (var i = 0; i < nutrientKeys.length; i++) {
+                        var nutrient1 = nutrientKeys[0];
+                        var nutrient2 = nutrientKeys[1];
+                        var listItem1 = $('<li>');
+                        listItem1.text("Calories" + data.parsed[0].food.nutrients[nutrient1]);
+                        var listItem2 = $('<li>');
+                        listItem2.text("Protein" + data.parsed[0].food.nutrients[nutrient2]);
+                    }
+
+
+                    macroContainer.append(listItem1, listItem2);
+
+
+                    // for (var i = 0; i < nutrientKeys.length; i++) {
+                    //     var nutrient = nutrientKeys[i];
+                    //     var listItem = $('<p>');
+                    //     var listItemContent = data.parsed[0].food.nutrients[nutrient];
+
+                    //     listItem.text(listItemContent);
+                    //     macroContainer.append(listItem);
+
+                    // }
+
                 });
             }
         })
 }
-
 
 
 
