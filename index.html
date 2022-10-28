@@ -80,12 +80,13 @@
 
         <!-- this is the right section - placeholder for map api -->
         <div class="px-6" id="right-section">
+            <h3 style="color:white;">Macronutrients</h3>
             <!-- <div class="h-12 mt-8 flex justify-end items-center">
                 <i class="fa fa-user"></i>
             </div> -->
             <div class="mt-4 justify-center">
                 <input type="text" class="bg-white hover:bg-white text-[#30475E] font-bold py-2 px-4 rounded-full"
-                    id="ingredient" placeholder="Ingredient">
+                    id="Ingredients" placeholder="Ingredients">
             </div>
             <div class="mt-4 justify-center">
                 <button class="bg-white hover:bg-white text-[#30475E] font-bold py-2 px-4 rounded-full" type="submit"
@@ -96,40 +97,14 @@
 
             <div class="mt-12 p-6 bg-white custom-rounded font-hairline text-xs">
                 <div class="mt-12 p-6 bg-white custom-rounded font-hairline text-xs">
-                    <div class="flex justify-between items-center">
-                        <p class="text-black">Search Nearby Restaurants:</p>
-                    </div>
-                    <div class="flex items-center mt-4">
-                        <p class="text-black mx-3">Radius</p>
-                        <select class="cursor-pointer" id="radius">
-                            <option value="five"> 5 </option>
-                            <option value="ten"> 10 </option>
-                            <option value="fifteen"> 15 </option>
-                            <option value="twenty"> 20 </option>
-                            <option value="twenty-five"> 25 </option>
-                        </select>
-                        <p class="text-yellow-400 ml-auto">miles</p>
-                    </div>
+                   
+            
                 </div>
-                <button
-                    class="bg-blue-500 hover:bg-blue-700 mx-16 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" id="mapSearch"> Search
-                </button>
+          
                 <div v-for="(item, index) in cartItems" class="grid grid-cols-4 gap-1 mb-5"
                     :class="{'mt-12' : index == 0}"></div>
             </div>
-            <div id="searchMap" class="mt-12 p-6 bg-white text-black font-bold custom-rounded font-hairline text-xs">
-                Search
-                Results:
-                <ul>
-                    <li>placeholder</li>
-                    <li>placeholder</li>
-                    <li>placeholder</li>
-                    <li>placeholder</li>
-                    <li>placeholder</li>
-                    <li>placeholder</li>
-                </ul>
-            </div>
+      
 
 
             <div class="grid grid-cols-4 gap-1 mb-5"></div>
