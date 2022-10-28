@@ -13,6 +13,8 @@ var selectedDish = $('#selectedDishName');
 var ingredientButton = $('#ingredientButton');
 var ingredientName = document.querySelector('#ingredient');
 
+var sumContainer = $('#sumContainer');
+
 selectedDish.hide();
 
 var formSubmitHandler = function (event) {
@@ -117,10 +119,24 @@ var displayIngredients = function (id) {
                         ingredientsContainer.append(row);
                     }
                     console.log(sum);
+                    displaySum;
+                    haveButton.on('click', updateSum);
                 });
             }
         })
 };
+
+
+
+var displaySum = function () {
+    sumContainer.text(sum);
+}
+
+var updateSum = function () {
+    var subtractAmount = $(this).siblings('li').attr('id');
+    sum = sum - subtractAmount;
+    displaySum;
+}
 
 
 var getIngredientInfo = function (ingredient) {
@@ -136,6 +152,7 @@ var getIngredientInfo = function (ingredient) {
             }
         })
 }
+
 
 
 
