@@ -1,5 +1,4 @@
-var APIKey = 'be1a3b16ffa44575b01cb470f3ce3e58';
-
+var APIKey = '891e9d3f9aa64c16809947ac6f8de537';
 
 var dishName = document.querySelector('#food');
 var cuisineName = document.querySelector('#cuisine');
@@ -14,6 +13,7 @@ var ingredientButton = $('#ingredientButton');
 var ingredientName = document.querySelector('#ingredient');
 var ingredientCost = document.querySelector('#ingredientCost');
 
+var sumContainer = $('#sumContainer');
 var macroContainer = $('#macroContainer');
 
 selectedDish.hide();
@@ -83,67 +83,91 @@ function clickDish(event) {
 
 
     var buttonClicked = event.target;
+
     displayIngredients(buttonClicked.id);
     dishesContainer.empty();
     selectedDish.show();
 }
 
-var sum = 0;
+var retrieveData = async function (id) {
 
-var displayIngredients = function (id) {
+    var recipeUrl = 'https://api.spoonacular.com/recipes/' + id + '/information?apiKey=' + APIKey;
+    const response = await fetch(recipeUrl);
+    const recipeData = await response.json();
 
-    ingredientsContainer.empty();
-    var apiUrl = 'https://api.spoonacular.com/recipes/' + id + '/information?apiKey=' + APIKey
+    var ingredientCosts = [];
+    for (var i = 0; i < recipeData.extendedIngredients.length; i++) {
+        ingredientCosts[i] = await getIngredientAmount(recipeData.extendedIngredients[i].id, recipeData.extendedIngredients[i].amount)
+    }
 
-    fetch(apiUrl)
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    for (var i = 0; i < data.extendedIngredients.length; i++) {
-
-                        var row = $('<div>');
-                        row.addClass("flex justify-center");
-
-                        var listItemContent = data.extendedIngredients[i].name;
-                        var priceContent = data.extendedIngredients[i].amount;
-
-                        var listItem = $('<li>');
-                        listItem.text(listItemContent + ' - $' + priceContent + ' USD');
-                        listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
-                        listItem.attr('id', priceContent);
-                        sum += priceContent;
-
-                        var haveButton = $('<button>');
-                        haveButton.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow");
-                        haveButton.text("I have this");
-                        row.append(listItem, haveButton);
-                        ingredientsContainer.append(row);
-                    }
-                    console.log(sum);
-                    displaySum;
-                    haveButton.on('click', updateSum);
-                });
-            }
-        })
-};
-
-
-var displaySum = function () {
-    sumContainer.text(sum);
+    return {
+        ingredients: recipeData.extendedIngredients,
+        ingredientCosts: ingredientCosts
+    };
 }
 
-var updateSum = function () {
-    var subtractAmount = $(this).siblings('li').attr('id');
+var getIngredientAmount = async function (ingredientId, amount) {
+    var apiUrl = 'https://api.spoonacular.com/food/ingredients/' + ingredientId + '/information?apiKey=' + APIKey + '&amount=' + amount;
+    const response = await fetch(apiUrl);
+    if (response.ok) {
+        const ingredientData = await response.json();
+        return ingredientData.estimatedCost.value;
+    } else {
+        return 0;
+    }
+}
+
+var sum = 0;
+var displayIngredients = async function (id) {
+
+    ingredientsContainer.empty();
+
+    var data = await retrieveData(id);
+
+    for (var i = 0; i < data.ingredients.length; i++) {
+
+        var row = $('<div>');
+        row.addClass("flex justify-center");
+
+        var listItemContent = data.ingredients[i].name;
+        var priceContent = data.ingredientCosts[i];
+
+        var listItem = $('<li>');
+        listItem.text(listItemContent + ' ¢ ' + priceContent);
+        listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
+        sum += priceContent;
+
+        var haveButton = $('<button>');
+        haveButton.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow");
+        haveButton.text("I have this");
+        row.append(listItem, haveButton);
+        haveButton.on('click', updateSum);
+        haveButton.attr('id', priceContent);
+        ingredientsContainer.append(row);
+    }
+    console.log(sum);
+    displaySum(sum);
+
+};
+
+var displaySum = function (sum) {
+    sumContainer.empty();
+    var sumText = $('<p>');
+    sumText.text('$ ' + Math.round(sum / 100));
+    sumContainer.append(sumText);
+}
+
+var updateSum = function (event) {
+    event.preventDefault();
+    var buttonClicked = event.target;
+    var subtractAmount = parseInt(buttonClicked.id);
     sum = sum - subtractAmount;
-    displaySum;
+    displaySum(sum);
 }
 
 var nutrientMap = [{ CHOCDF: 'Carbohydrate' }, { ENERC_KCAL: 'Calories' }, { FAT: 'Fat' }, { FIBTG: 'Fiber' }, { PROCNT: 'Protein' }];
 
-
-
 var getIngredientInfo = function (ingredient) {
-
 
     var apiUrl = 'https://api.edamam.com/api/food-database/v2/parser?app_id=0c089911&app_key=dfc46540c3734d0319db196d84047446&ingr=' + ingredient + '&nutrition-type=cooking';
     fetch(apiUrl)
@@ -152,8 +176,6 @@ var getIngredientInfo = function (ingredient) {
                 response.json().then(function (data) {
                     console.log(data.parsed[0].food.nutrients);
                     console.log(data.parsed[0]);
-
-                    // var nutrientKeys = Object.keys(data.parsed[0].food.nutrients);
 
                     var nutrientKeys = Object.keys(data.parsed[0].food.nutrients);
                     for (var i = 0; i < nutrientKeys.length; i++) {
@@ -165,19 +187,7 @@ var getIngredientInfo = function (ingredient) {
                         listItem2.text("Protein" + data.parsed[0].food.nutrients[nutrient2]);
                     }
 
-
                     macroContainer.append(listItem1, listItem2);
-
-
-                    // for (var i = 0; i < nutrientKeys.length; i++) {
-                    //     var nutrient = nutrientKeys[i];
-                    //     var listItem = $('<p>');
-                    //     var listItemContent = data.parsed[0].food.nutrients[nutrient];
-
-                    //     listItem.text(listItemContent);
-                    //     macroContainer.append(listItem);
-
-                    // }
 
                 });
             }
