@@ -8,14 +8,18 @@ body * {
 
 header {
   text-align: center;
-  background-color: #F05454;
+  /* changed header color to match footer */
+  background-color: #222831;
   color: white;
   padding: 50px;
-
 }
 
 #dribbleShot {
   background-color: #FFF7E9;
+  /* added a background image - this can be changed as we want */
+  background:url(../images/adobe071.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height:70vh
 }
 
@@ -46,16 +50,18 @@ form {
   border-radius: 0 25px 0 0;
 }
 
-.timer {
+/* removed this styling - it was part of the template that we don't use */
+/* .timer {
   background: rgba(217, 194, 105, .2);
-}
+} */
 
-.text-xxs {
+/* .text-xxs {
   font-size: .7rem;
-}
+} */
 
-#right-section {
-  background-color: #30475E;
+/* added background color to match the ingredients price section */
+#side-section {
+  background-color: #af874b;
 }
 
 .headingText {
