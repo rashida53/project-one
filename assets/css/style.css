@@ -12,6 +12,7 @@ header {
   background-color: #222831;
   color: white;
   padding: 50px;
+
 }
 
 #dribbleShot {
@@ -20,12 +21,11 @@ header {
   background: url(../images/adobe071.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 70vh
 }
 
 footer {
   background-color: #222831;
-  color: white;
+  color: #FFF7E9;
   text-align: center;
   min-height: 10vh
 }
@@ -60,10 +60,11 @@ listHeading {
 }
 
 /* removed this styling - it was part of the template that we don't use */
+/* /* removed this styling - it was part of the template that we don't use */
 /* .timer {
   background: rgba(217, 194, 105, .2);
 } */
-
+*/
 /* .text-xxs {
   font-size: .7rem;
 } */
@@ -78,4 +79,9 @@ listHeading {
   font-size: 35px;
   text-align: center;
   padding-bottom: 3%;
+}
+
+/* added some styling for the ingredients needed text */
+#selectedDishName {
+  background-color: #FFF7E9;
 }
