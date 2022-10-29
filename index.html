@@ -23,7 +23,9 @@
 
                 <!-- this is the search form -->
                 <!-- changed some styling because it faded into the background picture -->
-                <h2 class="flex items-center justify-center ml-auto bg-gray-100 rounded-md px-4 h-10 w-1/4 border-2 border-[#F05454]">I feel like eating:</h2>
+                <h2
+                    class="flex items-center justify-center ml-auto bg-gray-100 rounded-md px-4 h-10 w-1/4 border-2 border-[#F05454] font-bold text-xl">
+                    I feel like eating:</h2>
 
                 <div
                     class="flex items-center ml-auto bg-gray-100 custom-rounded px-4 h-10 w-1/4 border-2 border-[#F05454]">
@@ -37,7 +39,7 @@
                         placeholder="e.g. Italian">
                 </div>
                 <button
-                    class="flex items-center ml-auto bg-gray-100 custom-rounded px-4 h-10 w-1/8 border-2 border-[#F05454]"
+                    class="flex items-center ml-auto bg-gray-100 custom-rounded px-4 h-10 w-1/8 border-2 border-[#F05454] text-l font-bold"
                     type="submit" id="submit"> Search
                 </button>
             </div>
@@ -46,15 +48,17 @@
             <div class="grid grid-cols-3 mt-12 rounded-lg">
                 <div class="col-span-1 flex flex-col items-center shadow-xl cursor-pointer transition-colors duration-700 ease-in-out"
                     :class="{: cat.id == activeCategory}" v-for="(cat, idx) in categories">
-                    
+
                     <!-- added styling for the background of ingredient cost -->
                     <div class="p-8 bg-[#af874b]" id="ingredientCost">
-                        Cost of Ingredients:
-                        <div class="total" id="sumContainer">
+                        <h2 class="headingText flex items-center justify-center text-white pb-10">Cost of Ingredients:
+                        </h2>
+                        <div class="flex justify-center text-xl font-bold" id="sumContainer">
 
                         </div>
                         <!-- added some food emojis - this can be changed later -->
-                        <div><p style="font-size:50px">&#129361;&#129388;</p>
+                        <div class="flex justify-center pt-10">
+                            <p style="font-size:50px">&#129361;&#129388;</p>
                             <p style="font-size:50px">&#127812;&#129385;</p>
                             <p style="font-size:50px">&#127834;&#127844;</p>
                         </div>
@@ -66,34 +70,35 @@
                     <div class="grid gap-4 grid-cols-3 grid-rows-3" id="showIngredients"></div>
 
                     <div>
-                        <h2 class="headingText" id="selectedDishName">Here's what you need</h2>
+                        <h2 class="flex items-center justify-center bg-[#af874b] rounded-md px-4 h-10 border-2 border-black font-bold text-xl"
+                            id="selectedDishName">Here's what you need</h2>
                         <ul id="ingredientsAndPrices"></ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="shadow-lg relative h-40 custom-rounded":>
+        <div class="shadow-lg relative h-40 custom-rounded" :>
         </div>
 
         <!-- this is the right section - macro-nutrients -->
         <div class="px-6" id="side-section">
-            <h3 style="color:white;">Macro-nutrients</h3>
+            <h3 class="headingText flex items-center justify-center" style="color:white;">Macro-nutrients</h3>
             <!-- <div class="h-12 mt-8 flex justify-end items-center">
                 <i class="fa fa-user"></i>
             </div> -->
             <div class="mt-4 justify-center">
                 <input type="text" class="bg-white hover:bg-white text-[#30475E] font-bold py-2 px-4 rounded-full"
-                    id="ingredient" placeholder="Ingredients">
+                    id="ingredient" placeholder="Ingredient">
             </div>
             <div class="mt-4 justify-center">
                 <button class="bg-white hover:bg-white text-[#30475E] font-bold py-2 px-4 rounded-full" type="submit"
                     id="ingredientButton">
-                    Click me
+                    Check
                 </button>
             </div>
 
             <div class="mt-12 p-6 bg-white custom-rounded font-hairline text-xs">
-                <div class="mt-12 p-6 bg-white custom-rounded font-hairline text-xs" id="macroContainer">
+                <div class="mt-5 p-6 bg-white custom-rounded font-hairline text-xs" id="macroContainer">
                 </div>
                 <!-- <div v-for="(item, index) in cartItems" class="grid grid-cols-4 gap-1 mb-5"
                     :class="{'mt-12' : index == 0}"></div> -->

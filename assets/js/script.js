@@ -1,4 +1,4 @@
-var APIKey = '891e9d3f9aa64c16809947ac6f8de537';
+var APIKey = '928a19709b3147dfb61a107ee0868003';
 
 var dishName = document.querySelector('#food');
 var cuisineName = document.querySelector('#cuisine');
@@ -48,7 +48,7 @@ var clickHandler = function (event) {
 ingredientButton.on('click', clickHandler);
 
 function getDishInfo(dish, cuisine) {
-    var apiUrl = 'https://api.spoonacular.com/recipes/complexSearch?query=' + dish + '&cuisine=' + cuisine + '&apiKey=' + APIKey
+    var apiUrl = 'https://api.spoonacular.com/recipes/complexSearch?query=' + dish + '&cuisine=' + cuisine + '&apiKey=' + APIKey + '&number=12'
 
     fetch(apiUrl)
         .then(function (response) {
@@ -72,7 +72,7 @@ var displayDishName = function (dish) {
     var button = $('<button>');
     button.text(buttonContent);
     button.attr('id', dish.id);
-    button.addClass("text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 object-scale-down");
+    button.addClass("text-white font-bold bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 object-scale-down border-2 border-white");
     button.on('click', clickDish);
     dishesContainer.append(button);
 
@@ -97,7 +97,8 @@ var retrieveData = async function (id) {
 
     var ingredientCosts = [];
     for (var i = 0; i < recipeData.extendedIngredients.length; i++) {
-        ingredientCosts[i] = await getIngredientAmount(recipeData.extendedIngredients[i].id, recipeData.extendedIngredients[i].amount)
+        ingredientCosts[i] = await getIngredientAmount(recipeData.extendedIngredients[i].id, recipeData.extendedIngredients[i].amount,
+            recipeData.extendedIngredients[i].unit);
     }
 
     return {
@@ -106,8 +107,8 @@ var retrieveData = async function (id) {
     };
 }
 
-var getIngredientAmount = async function (ingredientId, amount) {
-    var apiUrl = 'https://api.spoonacular.com/food/ingredients/' + ingredientId + '/information?apiKey=' + APIKey + '&amount=' + amount;
+var getIngredientAmount = async function (ingredientId, amount, unit) {
+    var apiUrl = 'https://api.spoonacular.com/food/ingredients/' + ingredientId + '/information?apiKey=' + APIKey + '&amount=' + amount + '&unit=' + unit;
     const response = await fetch(apiUrl);
     if (response.ok) {
         const ingredientData = await response.json();
@@ -138,7 +139,7 @@ var displayIngredients = async function (id) {
         sum += priceContent;
 
         var haveButton = $('<button>');
-        haveButton.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow");
+        haveButton.addClass("have-btn bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow");
         haveButton.text("I have this");
         row.append(listItem, haveButton);
         haveButton.on('click', updateSum);
@@ -152,7 +153,7 @@ var displayIngredients = async function (id) {
 
 var displaySum = function (sum) {
     sumContainer.empty();
-    var sumText = $('<p>');
+    var sumText = $('<h2>');
     sumText.text('$ ' + Math.round(sum / 100));
     sumContainer.append(sumText);
 }
@@ -160,12 +161,16 @@ var displaySum = function (sum) {
 var updateSum = function (event) {
     event.preventDefault();
     var buttonClicked = event.target;
+    $(buttonClicked).parent().children('li').removeClass("bg-red-700");
+    $(buttonClicked).parent().children('li').addClass("bg-slate-400");
+    $(buttonClicked).parent().children('button').removeClass("bg-red-700");
+    $(buttonClicked).parent().children('button').addClass("bg-slate-400");
+    // $("button[have-btn]").next().css("background-color", "gray");
     var subtractAmount = parseInt(buttonClicked.id);
     sum = sum - subtractAmount;
     displaySum(sum);
 }
 
-var nutrientMap = [{ CHOCDF: 'Carbohydrate' }, { ENERC_KCAL: 'Calories' }, { FAT: 'Fat' }, { FIBTG: 'Fiber' }, { PROCNT: 'Protein' }];
 
 var getIngredientInfo = function (ingredient) {
 
@@ -181,13 +186,29 @@ var getIngredientInfo = function (ingredient) {
                     for (var i = 0; i < nutrientKeys.length; i++) {
                         var nutrient1 = nutrientKeys[0];
                         var nutrient2 = nutrientKeys[1];
+                        var nutrient3 = nutrientKeys[2];
+                        var nutrient4 = nutrientKeys[3];
+                        var nutrient5 = nutrientKeys[4];
+
                         var listItem1 = $('<li>');
-                        listItem1.text("Calories" + data.parsed[0].food.nutrients[nutrient1]);
+                        listItem1.text("Calories- " + data.parsed[0].food.nutrients[nutrient1]);
+                        listItem1.addClass("text-xl font-bold list-none");
                         var listItem2 = $('<li>');
-                        listItem2.text("Protein" + data.parsed[0].food.nutrients[nutrient2]);
+                        listItem2.text("Protein- " + data.parsed[0].food.nutrients[nutrient2]);
+                        listItem2.addClass("text-xl font-bold list-none");
+                        var listItem3 = $('<li>');
+                        listItem3.text("Fat- " + data.parsed[0].food.nutrients[nutrient3]);
+                        listItem3.addClass("text-xl font-bold list-none");
+                        var listItem4 = $('<li>');
+                        listItem4.text("Carbohydrate- " + data.parsed[0].food.nutrients[nutrient4]);
+                        listItem4.addClass("text-xl font-bold list-none");
+                        var listItem5 = $('<li>');
+                        listItem5.text("Fiber- " + data.parsed[0].food.nutrients[nutrient5]);
+                        listItem5.addClass("text-xl font-bold list-none");
+
                     }
 
-                    macroContainer.append(listItem1, listItem2);
+                    macroContainer.append(listItem1, listItem2, listItem3, listItem4, listItem5);
 
                 });
             }

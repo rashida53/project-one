@@ -17,17 +17,17 @@ header {
 #dribbleShot {
   background-color: #FFF7E9;
   /* added a background image - this can be changed as we want */
-  background:url(../images/adobe071.jpg);
+  background: url(../images/adobe071.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  min-height:70vh
+  min-height: 70vh
 }
 
 footer {
   background-color: #222831;
   color: white;
   text-align: center;
-  min-height:10vh
+  min-height: 10vh
 }
 
 form {
@@ -48,6 +48,15 @@ form {
 
 .custom-tr-rounded {
   border-radius: 0 25px 0 0;
+}
+
+listHeading {
+  color: red;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 /* removed this styling - it was part of the template that we don't use */
