@@ -53,74 +53,71 @@
                     <div class="p-8 bg-[#af874b]" id="ingredientCost">
                         <h2 class="headingText flex items-center justify-center text-white pb-10">Cost of Ingredients:
                         </h2>
-                        <div class="flex justify-center text-xl font-bold" id="sumContainer">
-                            <!-- added some food emojis - this can be changed later -->
-                            <div>
-                                <p style="font-size:50px">&#129361;&#129388;</p>
-                                <p style="font-size:50px">&#127812;&#129385;</p>
-                                <p style="font-size:50px">&#127834;&#127844;</p>
-                            </div>
-                            <!-- added some food emojis - this can be changed later -->
-                            <div class="flex justify-center pt-10">
-                                <p style="font-size:50px">&#129361;&#129388;</p>
-                                <p style="font-size:50px">&#127812;&#129385;</p>
-                                <p style="font-size:50px">&#127834;&#127844;</p>
-                            </div>
+
+
+                        <div class="headingText flex justify-center text-white font-bold" id="sumContainer">
                         </div>
-                    </div>
-
-                    <!-- this is the center section where the recipes and ingredients appear after a successful search -->
-                    <div class="col-span-2 ">
-                        <div class="grid gap-4 grid-cols-3 grid-rows-3" id="showIngredients"></div>
-
-                        <div>
-                            <h2 class="flex items-center justify-center bg-[#af874b] rounded-md px-4 h-10 border-2 border-black font-bold text-xl"
-                                id="selectedDishName">Here's what you need</h2>
-                            <ul id="ingredientsAndPrices"></ul>
+                        <!-- added some food emojis - this can be changed later -->
+                        <div class="flex justify-center pt-10">
+                            <p style="font-size:50px">&#129361;&#129388;</p>
+                            <p style="font-size:50px">&#127812;&#129385;</p>
+                            <p style="font-size:50px">&#127834;&#127844;</p>
                         </div>
+
                     </div>
                 </div>
-            </div>
-            <div class="shadow-lg relative h-40 custom-rounded" :>
-            </div>
 
-            <!-- this is the right section - macro-nutrients -->
-            <div class="px-6" id="side-section">
-                <h3 class="headingText flex items-center justify-center" style="color:white;">Macro-nutrients</h3>
-                <!-- <div class="h-12 mt-8 flex justify-end items-center">
-                <i class="fa fa-user"></i>
-            </div> -->
-                <div class="mt-4 justify-center">
-                    <input type="text" class="bg-white hover:bg-white text-[#30475E] font-bold py-2 px-4 rounded-full"
-                        id="ingredient" placeholder="Ingredient">
-                </div>
-                <div class="mt-4 justify-center">
-                    <button class="bg-white hover:bg-white text-[#30475E] font-bold py-2 px-4 rounded-full"
-                        type="submit" id="ingredientButton">
-                        Check
-                    </button>
-                </div>
-
-                <div class="mt-12 p-6 bg-white custom-rounded font-hairline text-xs">
-                    <div class="mt-5 p-6 bg-white custom-rounded font-hairline text-xs" id="macroContainer">
+                <!-- this is the center section where the recipes and ingredients appear after a successful search -->
+                <div class="col-span-2 ">
+                    <div class="grid gap-4 grid-cols-3 grid-rows-3" id="showIngredients">
                     </div>
-                    <!-- <div v-for="(item, index) in cartItems" class="grid grid-cols-4 gap-1 mb-5"
-                    :class="{'mt-12' : index == 0}"></div> -->
+                    <div>
+                        <h2 class="flex items-center justify-center bg-[#af874b] rounded-md px-4 h-10 border-2 border-black font-bold text-xl"
+                            id="selectedDishName">Here's what you need</h2>
+                        <ul id="ingredientsAndPrices"></ul>
+                    </div>
                 </div>
-                <div class="grid grid-cols-4 gap-1 mb-5"></div>
             </div>
         </div>
+        <div class="shadow-lg relative h-40 custom-rounded" :>
+        </div>
 
-        <!-- removed this to get rid of the white space between body and footer -->
-        <!-- <div class="flex h-10 bg-gray-300">
+        <!-- this is the right section - macro-nutrients -->
+        <div class="px-6" id="side-section">
+            <h3 class="headingText flex items-center justify-center" style="color:white;">Macro-nutrients
+            </h3>
+            <!-- <div class="h-12 mt-8 flex justify-end items-center">
+                <i class="fa fa-user"></i>
+            </div> -->
+            <div class="mt-4 justify-center">
+                <input type="text" class="bg-white hover:bg-white text-[#30475E] font-bold py-2 px-4 rounded-full"
+                    id="ingredient" placeholder="Ingredient">
+            </div>
+            <div class="mt-4 justify-center">
+                <button class="bg-white hover:bg-white text-[#30475E] font-bold py-2 px-4 rounded-full" type="submit"
+                    id="ingredientButton">
+                    Check
+                </button>
+            </div>
+
+            <div class="mt-12 p-6 bg-white custom-rounded font-hairline text-xs">
+                <div class="mt-5 p-6 bg-white custom-rounded font-hairline text-xs" id="macroContainer">
+                </div>
+                <!-- <div v-for="(item, index) in cartItems" class="grid grid-cols-4 gap-1 mb-5"
+                    :class="{'mt-12' : index == 0}"></div> -->
+            </div>
+            <div class="grid grid-cols-4 gap-1 mb-5"></div>
+        </div>
+    </div>
+
+    <!-- removed this to get rid of the white space between body and footer -->
+    <!-- <div class="flex h-10 bg-gray-300">
         <div class="flex-grow px-16 main border-r border-gray-200"></div> -->
     </div>
 
     <footer>A Crimson Champions Project <p style="font-size:100px">&#127790;</p>
     </footer>
 
-    <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqbnZTtke6xuPNgmMnoO9ysik0J8Krpo4&libraries=places&callback=initMap"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
