@@ -18,7 +18,7 @@ header {
 #dribbleShot {
   background-color: #FFF7E9;
   /* added a background image - this can be changed as we want */
-  background: url(../images/adobe071.jpg);
+  background: url(../images/white-bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -71,11 +71,11 @@ listHeading {
 
 /* added background color to match the ingredients price section */
 #side-section {
-  background-color: #af874b;
+  background-color: #4E9F3D;
 }
 
 .headingText {
-  color: black;
+  color: #4E9F3D;
   font-size: 35px;
   text-align: center;
   padding-bottom: 3%;
@@ -85,3 +85,9 @@ listHeading {
 /* #selectedDishName {
   background-color: #FFF7E9;
 } */
+
+.ingredient-btn {
+  display: block;
+  width: 50%;
+  padding: 5%;
+}

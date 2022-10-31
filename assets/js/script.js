@@ -15,6 +15,7 @@ var ingredientCost = document.querySelector('#ingredientCost');
 
 var sumContainer = $('#sumContainer');
 var macroContainer = $('#macroContainer');
+var buttons = $('#ingredientHistory');
 
 selectedDish.hide();
 
@@ -39,10 +40,12 @@ var clickHandler = function (event) {
     var ingredientNameEl = ingredientName.value.trim();
 
     if (ingredientNameEl) {
-        getIngredientInfo(ingredientNameEl)
+        getIngredientInfo(ingredientNameEl);
+        saveIngredient(ingredientNameEl);
     } else {
         alert("Please enter an ingredient");
     }
+
 };
 
 ingredientButton.on('click', clickHandler);
@@ -174,6 +177,8 @@ var updateSum = function (event) {
 
 var getIngredientInfo = function (ingredient) {
 
+    macroContainer.empty();
+
     var apiUrl = 'https://api.edamam.com/api/food-database/v2/parser?app_id=0c089911&app_key=dfc46540c3734d0319db196d84047446&ingr=' + ingredient + '&nutrition-type=cooking';
     fetch(apiUrl)
         .then(function (response) {
@@ -213,6 +218,22 @@ var getIngredientInfo = function (ingredient) {
                 });
             }
         })
+}
+
+function saveIngredient(ingredient) {
+    var key = "ingredientName";
+    var valueToSave = ingredient;
+    var history = localStorage.getItem(key);
+
+    if (history === null) {
+        localStorage.setItem(key, JSON.stringify("[]"));
+        history = "[]";
+    }
+    var currentHistory = JSON.parse(history);
+    if (!history.includes(valueToSave)) {
+        currentHistory.push(valueToSave);
+        localStorage.setItem(key, JSON.stringify(currentHistory));
+    }
 }
 
 
