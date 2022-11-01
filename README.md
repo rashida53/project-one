@@ -1,4 +1,4 @@
-# Hungry?
+# Foodle
 
 ## Description
 <font size = '3'>
