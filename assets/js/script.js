@@ -1,4 +1,4 @@
-var APIKey = 'be1a3b16ffa44575b01cb470f3ce3e58';
+var APIKey = '3b2cd8c9b12f4c8693e10ee77338f3a7';
 
 var dishName = document.querySelector('#food');
 var cuisineName = document.querySelector('#cuisine');
@@ -59,7 +59,6 @@ function getDishInfo(dish, cuisine) {
             if (response.ok) {
                 response.json().then(function (data) {
                     for (var i = 0; i < data.results.length; i++) {
-                        console.log(data.results[i].title);
                         displayDishName(data.results[i]);
                     }
                 })
@@ -125,7 +124,18 @@ var getIngredientAmount = async function (ingredientId, amount, unit) {
 var sum = 0;
 var displayIngredients = async function (id) {
 
+    sum = 0;
+
     ingredientsContainer.empty();
+
+    var key = "ingredientName";
+    var stored = localStorage.getItem(key);
+    var avoidItems;
+    if (stored === null) {
+        avoidItems = []
+    } else {
+        avoidItems = JSON.parse(stored);
+    }
 
     var data = await retrieveData(id);
 
@@ -139,7 +149,15 @@ var displayIngredients = async function (id) {
 
         var listItem = $('<li>');
         listItem.text(listItemContent + ' ¢ ' + priceContent);
-        listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
+
+        for (var j = 0; j < avoidItems.length; j++) {
+            if (avoidItems[j].includes(listItemContent) || listItemContent.includes(avoidItems[j])) {
+                listItem.addClass("bg-orange-300 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
+            } else {
+                listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
+            }
+        }
+
         sum += priceContent;
 
         var haveButton = $('<button>');
@@ -152,6 +170,7 @@ var displayIngredients = async function (id) {
     }
     console.log(sum);
     displaySum(sum);
+
 };
 
 var displaySum = function (sum) {
@@ -168,7 +187,6 @@ var updateSum = function (event) {
     $(buttonClicked).parent().children('li').addClass("bg-slate-400");
     $(buttonClicked).parent().children('button').removeClass("bg-red-700");
     $(buttonClicked).parent().children('button').addClass("bg-slate-400");
-    // $("button[have-btn]").next().css("background-color", "gray");
     var subtractAmount = parseInt(buttonClicked.id);
     sum = sum - subtractAmount;
     displaySum(sum);
@@ -179,13 +197,6 @@ var getIngredientInfo = function (ingredient) {
 
     macroContainer.empty();
 
-    var key = "avoidThis";
-
-    var avoidItems = JSON.parse(localStorage.getItem(key))
-
-    for (var i = 0; i < avoidItems.length; i++) {
-        var blackList = avoidItems[i];
-    }
 
     var apiUrl = 'https://api.edamam.com/api/food-database/v2/parser?app_id=0c089911&app_key=dfc46540c3734d0319db196d84047446&ingr=' + ingredient + '&nutrition-type=cooking';
     fetch(apiUrl)
