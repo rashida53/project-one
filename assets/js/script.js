@@ -1,4 +1,4 @@
-var APIKey = '3b2cd8c9b12f4c8693e10ee77338f3a7';
+var APIKey = '928a19709b3147dfb61a107ee0868003';
 
 var dishName = document.querySelector('#food');
 var cuisineName = document.querySelector('#cuisine');
@@ -21,6 +21,7 @@ var avoidButton = $('#avoidButton');
 
 selectedDish.hide();
 
+//takes dish and cuisine input
 var formSubmitHandler = function (event) {
     event.preventDefault();
 
@@ -36,6 +37,7 @@ var formSubmitHandler = function (event) {
 
 submitButtonEl.on('click', formSubmitHandler);
 
+//takes ingredient to check macros
 var clickHandler = function (event) {
     event.preventDefault();
 
@@ -51,6 +53,7 @@ var clickHandler = function (event) {
 
 ingredientButton.on('click', clickHandler);
 
+//API call to get dish names
 function getDishInfo(dish, cuisine) {
     var apiUrl = 'https://api.spoonacular.com/recipes/complexSearch?query=' + dish + '&cuisine=' + cuisine + '&apiKey=' + APIKey + '&number=12'
 
@@ -66,6 +69,7 @@ function getDishInfo(dish, cuisine) {
         })
 }
 
+//function to make buttons to display dishes
 var displayDishName = function (dish) {
     ingredientsContainer.empty();
     selectedDish.hide();
@@ -92,6 +96,8 @@ function clickDish(event) {
     selectedDish.show();
 }
 
+
+//API call to get list of ingredients 
 var retrieveData = async function (id) {
 
     var recipeUrl = 'https://api.spoonacular.com/recipes/' + id + '/information?apiKey=' + APIKey;
@@ -110,6 +116,7 @@ var retrieveData = async function (id) {
     };
 }
 
+//API call to get ingredient's prices through ID of ingredient
 var getIngredientAmount = async function (ingredientId, amount, unit) {
     var apiUrl = 'https://api.spoonacular.com/food/ingredients/' + ingredientId + '/information?apiKey=' + APIKey + '&amount=' + amount + '&unit=' + unit;
     const response = await fetch(apiUrl);
@@ -150,6 +157,7 @@ var displayIngredients = async function (id) {
         var listItem = $('<li>');
         listItem.text(listItemContent + ' ¢ ' + priceContent);
 
+        //color orange if item is from avoid items array in local storage, else color red
         for (var j = 0; j < avoidItems.length; j++) {
             if (avoidItems[j].includes(listItemContent) || listItemContent.includes(avoidItems[j])) {
                 listItem.addClass("bg-orange-300 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
@@ -173,6 +181,7 @@ var displayIngredients = async function (id) {
 
 };
 
+//displays total cost of ingredients
 var displaySum = function (sum) {
     sumContainer.empty();
     var sumText = $('<h2>');
@@ -180,6 +189,7 @@ var displaySum = function (sum) {
     sumContainer.append(sumText);
 }
 
+//function to subtract price of ingredient user already has
 var updateSum = function (event) {
     event.preventDefault();
     var buttonClicked = event.target;
@@ -192,7 +202,7 @@ var updateSum = function (event) {
     displaySum(sum);
 }
 
-
+//API call to get macro nutrients
 var getIngredientInfo = function (ingredient) {
 
     macroContainer.empty();
@@ -239,6 +249,7 @@ var getIngredientInfo = function (ingredient) {
         })
 }
 
+//saving ingredients that user wants to avoid to local storage
 function saveIngredient(ingredient) {
     var key = "ingredientName";
     var valueToSave = ingredient;
