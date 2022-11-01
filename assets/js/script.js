@@ -145,13 +145,12 @@ var displayIngredients = async function (id) {
         haveButton.addClass("have-btn bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow");
         haveButton.text("I have this");
         row.append(listItem, haveButton);
-        haveButton.on('click', updateSum);
+        haveButton.one('click', updateSum); //This makes the updating the total cost button click once. 
         haveButton.attr('id', priceContent);
         ingredientsContainer.append(row);
     }
     console.log(sum);
     displaySum(sum);
-
 };
 
 var displaySum = function (sum) {
