@@ -17,6 +17,8 @@ var sumContainer = $('#sumContainer');
 var macroContainer = $('#macroContainer');
 var buttons = $('#ingredientHistory');
 
+var avoidButton = $('#avoidButton');
+
 selectedDish.hide();
 
 var formSubmitHandler = function (event) {
@@ -41,7 +43,6 @@ var clickHandler = function (event) {
 
     if (ingredientNameEl) {
         getIngredientInfo(ingredientNameEl);
-        saveIngredient(ingredientNameEl);
     } else {
         alert("Please enter an ingredient");
     }
@@ -178,6 +179,14 @@ var getIngredientInfo = function (ingredient) {
 
     macroContainer.empty();
 
+    var key = "avoidThis";
+
+    var avoidItems = JSON.parse(localStorage.getItem(key))
+
+    for (var i = 0; i < avoidItems.length; i++) {
+        var blackList = avoidItems[i];
+    }
+
     var apiUrl = 'https://api.edamam.com/api/food-database/v2/parser?app_id=0c089911&app_key=dfc46540c3734d0319db196d84047446&ingr=' + ingredient + '&nutrition-type=cooking';
     fetch(apiUrl)
         .then(function (response) {
@@ -236,4 +245,13 @@ function saveIngredient(ingredient) {
 }
 
 
+function avoidIngredient(event) {
+    event.preventDefault();
 
+    var ingredientNameEl = ingredientName.value.trim();
+
+    saveIngredient(ingredientNameEl);
+
+}
+
+avoidButton.on('click', avoidIngredient)
