@@ -1,4 +1,4 @@
-var APIKey = '928a19709b3147dfb61a107ee0868003';
+var APIKey = 'be1a3b16ffa44575b01cb470f3ce3e58';
 
 var dishName = document.querySelector('#food');
 var cuisineName = document.querySelector('#cuisine');
