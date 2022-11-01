@@ -43,8 +43,12 @@ There is also a search bar for nutritional information like the amount of calori
 - The avoided ingredients from local storage will return as orange in every dish clicked.
 
 
---Link to website goes here--
-</font><br></br>
+## Deployment
+
+This website has been deployed to this [URL](https://rashida53.github.io/project-one) using Github pages.
+
+
+
 
 ![Website Picture](./assets/images/Foodies1.JPG)
 ![Website Picture](./assets/images/Foodies2.JPG)
