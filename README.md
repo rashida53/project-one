@@ -21,7 +21,8 @@ There is also a search bar for nutritional information like the amount of carboh
 --Link to website goes here--
 </font><br></br>
 
-![Website Picture](./assets/images/localhost_1932_UT_Austin_safeguard_Project-01_index.html.png)
+![Website Picture](./assets/images/Foodies1.JPG)
+![Website Picture](./assets/images/Foodies2.JPG)
 
 ## Collaborators
 
