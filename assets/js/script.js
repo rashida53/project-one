@@ -157,12 +157,16 @@ var displayIngredients = async function (id) {
         var listItem = $('<li>');
         listItem.text(listItemContent + ' ¢ ' + priceContent);
 
-        //color orange if item is from avoid items array in local storage, else color red
-        for (var j = 0; j < avoidItems.length; j++) {
-            if (avoidItems[j].includes(listItemContent) || listItemContent.includes(avoidItems[j])) {
-                listItem.addClass("bg-orange-300 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
-            } else {
-                listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
+        if (avoidItems.length === 0) {
+            listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
+        } else {
+            //color orange if item is from avoid items array in local storage, else color red
+            for (var j = 0; j < avoidItems.length; j++) {
+                if (avoidItems[j].includes(listItemContent) || listItemContent.includes(avoidItems[j])) {
+                    listItem.addClass("bg-orange-300 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
+                } else {
+                    listItem.addClass("bg-red-700 hover:bg-[#222831] text-white font-semibold py-2 px-4 border-2 border-white rounded shadow w-2/3");
+                }
             }
         }
 
@@ -260,7 +264,7 @@ function saveIngredient(ingredient) {
         history = "[]";
     }
     var currentHistory = JSON.parse(history);
-    if (!history.includes(valueToSave)) {
+    if (!currentHistory.includes(valueToSave)) {
         currentHistory.push(valueToSave);
         localStorage.setItem(key, JSON.stringify(currentHistory));
     }
